@@ -3,7 +3,7 @@ const Task = require("../models/Tasks");
 const getAllTasks = async (req, res) => {
   try {
     const tasks = await Task.find({});
-    res.status(201).json({ tasks });
+    res.status(201).json({ success: true, tasks, amount: tasks.length });
   } catch (error) {
     res.status(500).json({
       msg: error,
@@ -21,7 +21,7 @@ const getSingleTask = async (req, res) => {
       return res.status(404).json({ msg: `No task with id: ${taskID} found.` });
     }
 
-    res.status(201).json({ task });
+    res.status(201).json({ success: true, task });
   } catch (error) {
     res.status(500).json({
       msg: error,
@@ -32,7 +32,7 @@ const getSingleTask = async (req, res) => {
 const createSingleTask = async (req, res) => {
   try {
     const task = await Task.create(req.body);
-    res.status(201).json({ task });
+    res.status(201).json({ success: true, task });
   } catch (error) {
     res.status(500).json({
       msg: error,
@@ -53,7 +53,7 @@ const updateTask = async (req, res) => {
       return res.status(404).json({ msg: `No task with id: ${taskID} found.` });
     }
 
-    res.status(201).json({ task });
+    res.status(201).json({ success: true, task });
   } catch (error) {
     res.status(500).json({
       msg: error,
@@ -71,7 +71,7 @@ const deleteTask = async (req, res) => {
       return res.status(404).json({ msg: `No task with id: ${taskID} found.` });
     }
 
-    res.status(201).json({ task: null, status: "success" });
+    res.status(201).json({ success: true, task: null });
   } catch (error) {
     res.status(500).json({
       msg: error,
